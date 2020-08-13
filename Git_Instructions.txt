@@ -1,0 +1,29 @@
+git config --global user.name "Soumya06in"
+git config --global user.email "soumyabasu06in@gmail.com"
+
+cd "F:\My Data\Projects\Ahold\Exercises 1"
+
+git init
+git add .
+git commit -m "first commit"
+git status
+git remote add origin https://github.com/Soumya06in/Ahold-Exercises.git
+git push -u origin master
+
+
+
+git config --global user.name "Soumya Basu"
+git config --global user.email "soumya12.b@tcs.com"
+
+cd "J:\My Data\Projects\Ahold\Exercises 1"
+
+git init
+git add .
+git commit -m "first commit"
+git status
+git remote add origin https://code.fresco.me/soumya12.b/ahold-exercises-1.git
+git push -u origin master
+
+
+
+git add --all

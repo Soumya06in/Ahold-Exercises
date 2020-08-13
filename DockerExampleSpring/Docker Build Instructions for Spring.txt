@@ -1,0 +1,40 @@
+VM(ubuntu 18) Public IP: 13.93.120.161
+
+mkdir DockerExampleSpring
+cd DockerExampleSpring
+
+git clone https://github.com/dstar55/docker-hello-world-spring-boot .
+
+sudo docker build -t="hello-world-java" .
+
+sudo docker run -d  -p 8080:8080 hello-world-java:latest
+
+sudo docker container ls
+
+sudo docker inspect hello-world-java:latest
+
+sudo docker image ls
+
+sudo docker login --username soumya06in
+
+sudo docker tag hello-world-java:latest soumya06in/hello-world-java:latest
+
+sudo docker push soumya06in/hello-world-java:latest
+
+##############################################################################################
+Create a YAML file for pulling image, deploying image and access it from localhost server
+
+vi spring-config.yaml
+	
+##############################################################################################
+
+kubectl apply -f python-config.yaml --namespace=soumya-399001
+
+kubectl get pods --namespace=soumya-399001
+
+kubectl get svc --namespace=soumya-399001
+
+docker stop `docker container ls | grep "hello-world-java:*" | awk '{ print $1 }'`
+
+url: http://52.143.7.186/soumya/spring/helloworld
+

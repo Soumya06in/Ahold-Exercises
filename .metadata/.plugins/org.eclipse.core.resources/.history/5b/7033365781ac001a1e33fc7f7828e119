@@ -1,0 +1,60 @@
+package com.javatpoint.mypackage;
+
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+public class StoreData {
+	public static void main(String[] args) {
+
+		/*StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
+				.configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+
+		UserHandler userhandler = new UserHandler();
+		List<Employee> empList = userhandler.getEmpList();
+		
+		for (Employee employee : empList) {
+			session.save(employee);
+		}
+		
+		t.commit();
+		System.out.println("successfully saved");
+		factory.close();
+		session.close();*/
+		
+		Employee student = new Employee(11, "Ramesh", "Fadatare", "ram", 15000);
+		Employee student1 = new Employee(12, "John", "Cena", "john", 20000);
+        Transaction transaction = null;
+        try {
+        	Session session = HibernateUtil.getSessionFactory().openSession();
+            // start a transaction
+            transaction = session.beginTransaction();
+            // save the student objects
+            session.save(student);
+            session.save(student1);
+            // commit transaction
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        try {
+        	Session session = HibernateUtil.getSessionFactory().openSession();
+            List <Employee> students = session.createQuery("from Employee", Employee.class).list();
+            //students.forEach(s -> System.out.println(s.getFirstName()));
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+	}
+}

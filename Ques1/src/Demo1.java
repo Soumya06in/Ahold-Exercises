@@ -1,0 +1,16 @@
+import java.util.*;
+import java.util.stream.*;
+
+public class Demo1 {
+
+	public static void main(String[] args) {
+		// create a list of integers
+		List<Integer> numbers = Arrays.asList(2, 3, 4, 5, 3);
+
+		// collect method returns a set
+		Set<Integer> squareSet = numbers.stream().map(x -> x * x)
+				.collect(Collectors.toSet());
+		System.out.println(squareSet);
+	}
+
+}

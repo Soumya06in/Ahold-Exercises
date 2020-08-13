@@ -1,0 +1,45 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-spring-deploy
+  namespace: soumya-399001
+spec:
+  selector:
+    matchLabels:
+      app: ingress-spring-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ingress-spring-app
+    spec:
+      containers:
+      - name: pythoncont
+        image: soumya06in/hello-world-java:latest
+        imagePullPolicy: IfNotPresent
+		resources:
+            limits:
+              memory: 1Gi
+              cpu: "0.5"
+            requests:
+              memory: 256Mi
+              cpu: 250m
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-spring-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+  selector:
+    app: ingress-spring-app

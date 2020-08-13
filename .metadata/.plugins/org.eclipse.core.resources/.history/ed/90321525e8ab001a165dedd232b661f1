@@ -1,0 +1,77 @@
+package com.tcs.ahold.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import com.tcs.ahold.entity.Employee;
+
+public class UserHandler extends DefaultHandler {
+	// List to hold Employees object
+		private List<Employee> empList = null;
+		private Employee emp = null;
+		private StringBuilder data = null;
+
+		// getter method for employee list
+		public List<Employee> getEmpList() {
+			return empList;
+		}
+
+		boolean bfname = false;
+		boolean blname = false;
+		boolean bnname = false;
+		boolean bsalary = false;
+
+		@Override
+		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+
+			if (qName.equalsIgnoreCase("staff")) {
+				// create a new Employee and put it in Map
+				emp = new Employee();
+				// initialize list
+				if (empList == null)
+					empList = new ArrayList<Employee>();
+			} else if (qName.equalsIgnoreCase("firstname")) {
+				// set boolean values for fields, will be used in setting Employee variables
+				bfname = true;
+			} else if (qName.equalsIgnoreCase("lastname")) {
+				blname = true;
+			} else if (qName.equalsIgnoreCase("nickname")) {
+				bnname = true;
+			} else if (qName.equalsIgnoreCase("salary")) {
+				bsalary = true;
+			}
+			// create the data container
+			data = new StringBuilder();
+		}
+
+		@Override
+		public void endElement(String uri, String localName, String qName) throws SAXException {
+			if (bfname) {
+				emp.setFirstName(data.toString());
+				bfname = false;
+			} else if (blname) {
+				emp.setLastName(data.toString());
+				blname = false;
+			} else if (bnname) {
+				emp.setNickName(data.toString());
+				bnname = false;
+			} else if (bsalary) {
+				emp.setSalary(Double.parseDouble(data.toString()));
+				bsalary = false;
+			}
+			
+			if (qName.equalsIgnoreCase("staff")) {
+				// add Employee object to list
+				empList.add(emp);
+			}
+		}
+
+		@Override
+		public void characters(char ch[], int start, int length) throws SAXException {
+			data.append(new String(ch, start, length));
+		}
+}

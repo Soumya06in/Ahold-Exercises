@@ -1,0 +1,84 @@
+mkdir DockerExample
+cd DockerExample
+
+git clone https://github.com/shekhargulati/python-flask-docker-hello-world.git .
+
+sudo docker build -t python:1.0.0 .
+
+sudo docker run -d -p 5000:5000 python:1.0.0
+
+sudo docker container ls
+
+sudo docker inspect python:1.0.0
+
+sudo docker image ls
+
+sudo docker login --username soumya06in
+
+sudo docker tag 119591902fe8 soumya06in/python:1.0.0
+
+sudo docker push soumya06in/python:1.0.0
+
+##############################################################################################
+Create a YAML file for pulling image, deploying image and access it from localhost server
+
+vi python-config.yaml
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-python-deploy
+  namespace: soumya-399001
+spec:
+  selector:
+    matchLabels:
+      app: ingress-python-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ingress-python-app
+    spec:
+      containers:
+      - name: pythoncont
+        image: soumya06in/python:1.0.0
+        imagePullPolicy: IfNotPresent
+		resources:
+            limits:
+              memory: 1Gi
+              cpu: "0.5"
+            requests:
+              memory: 256Mi
+              cpu: 250m
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-python-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5000
+  selector:
+    app: ingress-python-app
+	
+##############################################################################################
+
+kubectl apply -f python-config.yaml --namespace=soumya-399001
+
+kubectl get pods --namespace=soumya-399001
+
+kubectl get svc --namespace=soumya-399001
+
+docker stop `docker container ls | grep "hello-world-java:*" | awk '{ print $1 }'`
+
+url: http://52.143.7.186/soumya/helloworld
+

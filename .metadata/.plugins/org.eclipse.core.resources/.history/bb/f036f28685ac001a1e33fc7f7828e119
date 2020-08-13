@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<company>
+	<staff>
+		<firstname>James</firstname>
+		<lastname>Serlock</lastname>
+		<nickname>Ser</nickname>
+		<salary>100000</salary>
+	</staff>
+	<staff>
+		<firstname>Jones</firstname>
+		<lastname>Jadencer</lastname>
+		<nickname>Song</nickname>
+		<salary>200000</salary>
+	</staff>
+</company>

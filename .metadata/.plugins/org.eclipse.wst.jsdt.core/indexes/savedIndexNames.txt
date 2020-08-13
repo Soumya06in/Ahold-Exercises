@@ -1,0 +1,7 @@
+INDEX VERSION 1.3+F:\My Data\Projects\Ahold\Exercises 1\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+249570060.index
+4169366984.index
+3826945223.index
+758208358.index
+352344220.index
+4217148001.index
