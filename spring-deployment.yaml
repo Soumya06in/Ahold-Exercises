@@ -27,7 +27,7 @@ spec:
               memory: 256Mi
               cpu: 250m
         ports:
-        - containerPort: 8085
+        - containerPort: 8080
           protocol: TCP
 
 
@@ -42,6 +42,6 @@ spec:
   type: LoadBalancer
   ports:
   - port: 8085
-    targetPort: 8085
+    targetPort: 8080
   selector:
     app: spring-app
