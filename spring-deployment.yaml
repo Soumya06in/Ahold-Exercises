@@ -39,7 +39,7 @@ metadata:
   name: spring-service
   namespace: soumya
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - port: 8085
   selector:
