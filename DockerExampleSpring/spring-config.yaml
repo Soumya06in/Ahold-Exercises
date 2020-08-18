@@ -19,7 +19,7 @@ spec:
       - name: pythoncont
         image: soumya06in/hello-world-java:latest
         imagePullPolicy: IfNotPresent
-		resources:
+	resources:
             limits:
               memory: 1Gi
               cpu: "0.5"
