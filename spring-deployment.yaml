@@ -42,5 +42,6 @@ spec:
   type: ClusterIP
   ports:
   - port: 8085
+    targetPort: 8085
   selector:
     app: spring-app
