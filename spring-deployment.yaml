@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: springcont
-        image: soumya06in/spring-docker:${BUILD_NUMBER}
+        image: soumya06in/spring-docker:1
         imagePullPolicy: IfNotPresent
         resources:
             limits:
