@@ -3,17 +3,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ingress-spring-deploy
+  name: spring-deploy
   namespace: soumya
 spec:
   selector:
     matchLabels:
-      app: ingress-spring-app
+      app: spring-app
   replicas: 1
   template:
     metadata:
       labels:
-        app: ingress-spring-app
+        app: spring-app
     spec:
       containers:
       - name: springcont
@@ -36,10 +36,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ingress-spring-service
+  name: spring-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
   - port: 8085
   selector:
-    app: ingress-spring-app
+    app: spring-app
