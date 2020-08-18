@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: springcont
-        image: soumya06in/hello-world-java:latest
+        image: soumya06in/spring-docker:${BUILD_NUMBER}
         imagePullPolicy: IfNotPresent
         resources:
             limits:
