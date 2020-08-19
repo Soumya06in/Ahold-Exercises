@@ -1,0 +1,45 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssh-spring-deploy
+spec:
+  selector:
+    matchLabels:
+      app: ssh-spring-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ssh-spring-app
+    spec:
+      containers:
+      - name: ssh-springcont
+        image: soumya06in/spring-docker:2
+        imagePullPolicy: IfNotPresent
+        resources:
+            limits:
+              memory: 1Gi
+              cpu: "0.5"
+            requests:
+              memory: 256Mi
+              cpu: 250m
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ssh-spring-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: ssh-spring-app
